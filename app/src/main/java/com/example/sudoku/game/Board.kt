@@ -1,8 +1,7 @@
 package com.example.sudoku.game
 
-import kotlin.random.Random
 
-class Board (val size: Int, val cells: List<Cell>){
+class Board (val size: Int, val cells: List<Cell>, val solutions: List<Cell>){
 
     fun getCell(row: Int, column: Int) = cells[row*size + column]
 

@@ -5,7 +5,7 @@ import java.util.*
 import kotlin.random.Random
 
 class SudokuGame {
-
+    var endGame = false
     var selectedCellLiveData = MutableLiveData<Pair<Int,Int>>()
     var cellsLiveData = MutableLiveData<List<Cell>>()
 
@@ -37,30 +37,36 @@ class SudokuGame {
     private val board: Board
 
     private val index = Random.nextInt(0,9)
-    private val values = BoardQuizze[index].split(",").map{it.toInt()}
+    private val quizze = BoardQuizze[index].split(",").map{it.toInt()}
+    private val solutions  = BoardSolution[index].split(",").map{it.toInt()}
     init {
 
-        val cells = List(9*9){i -> Cell(i/9, i%9, values[i], checkStart(values[i]))}
-        board = Board(9, cells)
+        val cells_quizze = List(9*9){i -> Cell(i/9, i%9, quizze[i], checkStart(quizze[i]))}
+        val cells_solution = List(9*9){i->Cell(i/9,i%9, solutions[i], false)}
+        board = Board(9, cells_quizze, cells_solution)
         selectedCellLiveData.postValue(Pair(selectedRow, selectedCol))
         cellsLiveData.postValue(board.cells)
     }
 
     fun handleInput(number: Int){
         if(selectedRow == -1 || selectedCol == -1) return
+
         if(board.getCell(selectedRow,selectedCol).isStarting) return
+
+        if(board.cells == board.solutions) {
+            endGame = true
+        }
 
         board.getCell(selectedRow, selectedCol).value = number
         cellsLiveData.postValue(board.cells)
     }
+
 
     fun updateSelectedCell(row: Int, column: Int){
         selectedRow = row
         selectedCol = column
         selectedCellLiveData.postValue(Pair(row,column))
     }
-
-
 
     private fun checkStart(value: Int):Boolean {
         if (value == 0) return false

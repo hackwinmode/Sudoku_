@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="90fc1222-a4b2-4133-a5ec-a05573fb7740">
-        <schema name="main" object-types="view, index, constraint, table, column, dataset trigger" />
+        <schema name="main" object-types="dataset trigger, column, table, constraint, view, index" />
       </connection>
     </loaded-nodes>
   </component>
@@ -38,9 +38,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="90fc1222-a4b2-4133-a5ec-a05573fb7740" object-ref="schemas/main/tables/SudokuBoards" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="03723cca-345a-4e84-a962-9ee47c96297f" />

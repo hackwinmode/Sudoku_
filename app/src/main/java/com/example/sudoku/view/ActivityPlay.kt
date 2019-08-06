@@ -4,10 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.DialogInterface
 import android.database.Cursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v7.app.AlertDialog
 import com.example.sudoku.R
 import com.example.sudoku.game.Cell
 //import com.example.sudoku.game.DataHandler
@@ -30,12 +32,30 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
         viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer {updateSelectedCellUI(it)})
         viewModel.sudokuGame.cellsLiveData.observe(this, Observer { updateCells(it) })
 
+
         val buttons = listOf(button_one,button_two,button_three,button_four,
             button_five,button_six,button_seven,button_eight,button_nine)
 
         buttons.forEachIndexed { index, button ->
             button.setOnClickListener {
                 viewModel.sudokuGame.handleInput(index+1)
+            }
+        }
+
+        btnSolve.setOnClickListener {
+            if(viewModel.sudokuGame.endGame){
+                val dialogBuilder = AlertDialog.Builder(this)
+
+                dialogBuilder.setMessage("You've solved the sudoku quizze!")
+                    .setCancelable(false)
+                    .setPositiveButton("OK",DialogInterface.OnClickListener{
+                        _, _-> finish()
+                    }).setNegativeButton("Cancel",DialogInterface.OnClickListener {
+                            dialog, _ -> dialog.cancel() })
+
+                val alert = dialogBuilder.create()
+                alert.setTitle("Congratulation!")
+                alert.show()
             }
         }
 

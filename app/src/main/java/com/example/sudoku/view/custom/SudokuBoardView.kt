@@ -171,7 +171,6 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet): View(contex
         listener?.onCellTouched(possibleSelectedRow,possibleSelectedCol)
     }
 
-
     fun updateSelectedCellUI(row: Int, column:Int){
         selectedRow = row
         selectedCol = column
