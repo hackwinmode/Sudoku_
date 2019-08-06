@@ -22,7 +22,7 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet): View(contex
 
     private var cells: List<Cell> ?= null
 
-    private var listener: SudokuBoardView.OnTouchListener ?= null
+    private var listener: OnTouchListener ?= null
 
     private val thickLinePaint = Paint().apply {
         style = Paint.Style.STROKE
@@ -177,7 +177,7 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet): View(contex
         invalidate()
     }
 
-    fun registerListener(listener: SudokuBoardView.OnTouchListener) {
+    fun registerListener(listener: OnTouchListener) {
         this.listener = listener
     }
 

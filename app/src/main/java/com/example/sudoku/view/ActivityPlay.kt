@@ -48,10 +48,7 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
 
                 dialogBuilder.setMessage("You've solved the sudoku quizze!")
                     .setCancelable(false)
-                    .setPositiveButton("OK",DialogInterface.OnClickListener{
-                        _, _-> finish()
-                    }).setNegativeButton("Cancel",DialogInterface.OnClickListener {
-                            dialog, _ -> dialog.cancel() })
+                    .setPositiveButton("OK",({_, _-> finish()}))
 
                 val alert = dialogBuilder.create()
                 alert.setTitle("Congratulation!")
