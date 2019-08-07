@@ -86,6 +86,12 @@
                 android:layout_row="0"/>
 
         <Button
+                android:text="@string/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btnClear"
+                android:layout_column="3"
+                android:layout_row="1"/>
+        <Button
                 android:text="@string/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/btnBack"

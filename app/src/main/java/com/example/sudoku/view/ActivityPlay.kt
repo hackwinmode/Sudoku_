@@ -33,12 +33,12 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
         viewModel.sudokuGame.cellsLiveData.observe(this, Observer { updateCells(it) })
 
 
-        val buttons = listOf(button_one,button_two,button_three,button_four,
+        val buttons = listOf(btnClear,button_one,button_two,button_three,button_four,
             button_five,button_six,button_seven,button_eight,button_nine)
 
         buttons.forEachIndexed { index, button ->
             button.setOnClickListener {
-                viewModel.sudokuGame.handleInput(index+1)
+                viewModel.sudokuGame.handleInput(index)
             }
         }
 
