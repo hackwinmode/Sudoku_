@@ -26,12 +26,9 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
         setContentView(R.layout.activity_play2)
         BoardView.registerListener(this)
 
-
-
         viewModel = ViewModelProviders.of(this).get(PlaySudokuViewModel::class.java)
         viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer {updateSelectedCellUI(it)})
         viewModel.sudokuGame.cellsLiveData.observe(this, Observer { updateCells(it) })
-
 
         val buttons = listOf(btnClear,button_one,button_two,button_three,button_four,
             button_five,button_six,button_seven,button_eight,button_nine)
@@ -57,7 +54,6 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
         }
 
         btnBack.setOnClickListener {
-
             super.onBackPressed()
         }
     }
