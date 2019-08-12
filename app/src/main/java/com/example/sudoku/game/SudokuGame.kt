@@ -58,10 +58,12 @@ class SudokuGame {
     private val index = Random.nextInt(0,1)
     private val quizze = boardQuizze[index].split(",").map{it.toInt()}
     private val solutions  = boardSolution[index].split(",").map{it.toInt()}
+
+
     init {
 
-        var cellsQuizze = List(9*9){i -> Cell(i/9, i%9, quizze[i], checkStart(quizze[i]))}
-        val cellsSolution = List(9*9){i->Cell(i/9,i%9, solutions[i], false)}
+        var cellsQuizze = List(9*9){i -> Cell(i/9, i%9, quizze[i], checkStart(quizze[i]), false)}
+        val cellsSolution = List(9*9){i->Cell(i/9,i%9, solutions[i], false, false)}
         board = Board(9, cellsQuizze, cellsSolution)
         selectedCellLiveData.postValue(Pair(selectedRow, selectedCol))
         cellsLiveData.postValue(board.cells)
@@ -69,17 +71,20 @@ class SudokuGame {
 
     fun handleInput(number: Int){
         if(selectedRow == -1 || selectedCol == -1) return
-
+        if(board.getCell(selectedRow,selectedCol).isCorrect) return
         if(board.getCell(selectedRow,selectedCol).isStarting) return
 
         board.getCell(selectedRow, selectedCol).value = number
 
-        if(board.cells == board.solutions) {
-            endGame = true
-        }
+        board.getCell(selectedRow,selectedCol).isCorrect =
+            checkCorrectCell(board.getCell(selectedRow,selectedCol).value,
+                board.solutions[selectedRow*9 + selectedCol].value)
+
+        endGame = checkEndgame(board.cells, board.solutions)
 
         cellsLiveData.postValue(board.cells)
     }
+
 
 
     fun updateSelectedCell(row: Int, column: Int){
@@ -88,8 +93,22 @@ class SudokuGame {
         selectedCellLiveData.postValue(Pair(row,column))
     }
 
+    private fun checkCorrectCell(cellQuizze: Int, cellSolution: Int): Boolean {
+        if(cellQuizze == cellSolution)
+            return true
+        else
+            return false
+    }
+
     private fun checkStart(value: Int):Boolean {
         if (value == 0) return false
+        return true
+    }
+
+    private fun checkEndgame(cellsQuizze: List<Cell>, cellSolutions: List<Cell>):Boolean{
+        for(i in 0 until 81)
+                if (cellsQuizze[i].value != cellSolutions[i].value)
+                    return false
         return true
     }
 }

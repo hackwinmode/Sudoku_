@@ -48,6 +48,12 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet): View(contex
 
     private val textInputPaint = Paint().apply{
         style = Paint.Style.FILL_AND_STROKE
+        color = Color.rgb(255,69,0)
+        textSize = 32F
+    }
+
+    private val textCorrectPaint = Paint().apply{
+        style = Paint.Style.FILL_AND_STROKE
         color = Color.BLUE
         textSize = 32F
     }
@@ -123,7 +129,15 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet): View(contex
 
                 val textWidth = textPaint.measureText(valueString)
                 val textHeight = textBounds.height()
-                if(it.isStarting) {
+                if(it.isCorrect){
+                        canvas.drawText(
+                            valueString,
+                            (column * cellSizePixels) + cellSizePixels / 2 - textWidth / 2,
+                            (row * cellSizePixels) + cellSizePixels / 2 - textHeight / 2,
+                            textCorrectPaint
+                        )
+                }
+                else if(it.isStarting) {
                     canvas.drawText(
                         valueString,
                         (column * cellSizePixels) + cellSizePixels / 2 - textWidth / 2,
