@@ -9,6 +9,9 @@ import android.database.Cursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import com.example.sudoku.R
 import com.example.sudoku.game.Cell
@@ -26,9 +29,12 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
         setContentView(R.layout.activity_play2)
         BoardView.registerListener(this)
 
-        viewModel = ViewModelProviders.of(this).get(PlaySudokuViewModel::class.java)
-        viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer {updateSelectedCellUI(it)})
-        viewModel.sudokuGame.cellsLiveData.observe(this, Observer { updateCells(it) })
+            viewModel = ViewModelProviders.of(this).get(PlaySudokuViewModel::class.java)
+
+            viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer {updateSelectedCellUI(it)})
+            viewModel.sudokuGame.cellsLiveData.observe(this, Observer { updateCells(it) })
+
+
 
         val buttons = listOf(btnClear,button_one,button_two,button_three,button_four,
             button_five,button_six,button_seven,button_eight,button_nine)
@@ -54,10 +60,10 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
         }
 
         btnBack.setOnClickListener {
+
             super.onBackPressed()
         }
     }
-
 
     private fun updateCells(cells: List<Cell>?) = cells?.let{
         BoardView.updateCells(cells)
