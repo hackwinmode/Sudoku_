@@ -1,21 +1,14 @@
 package com.example.sudoku.view
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.DialogInterface
-import android.database.Cursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.view.ViewPager
+
 import android.support.v7.app.AlertDialog
 import com.example.sudoku.R
 import com.example.sudoku.game.Cell
-//import com.example.sudoku.game.DataHandler
+
 import com.example.sudoku.view.custom.SudokuBoardView
 import com.example.sudoku.viewModel.PlaySudokuViewModel
 import kotlinx.android.synthetic.main.activity_play2.*
@@ -33,8 +26,6 @@ class ActivityPlay : AppCompatActivity(), SudokuBoardView.OnTouchListener {
 
             viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer {updateSelectedCellUI(it)})
             viewModel.sudokuGame.cellsLiveData.observe(this, Observer { updateCells(it) })
-
-
 
         val buttons = listOf(btnClear,button_one,button_two,button_three,button_four,
             button_five,button_six,button_seven,button_eight,button_nine)
