@@ -13,9 +13,13 @@ Các tính năng đã làm:
 ![Chọn sai](https://i.imgur.com/w1LnDIo.png)
 
 ![Chọn đúng](https://i.imgur.com/2NBhjpS.png)
-- Khi end game, ta sẽ so sánh dữ liệu trong board người chơi với board solution trong data được chọn 
-    -> thông báo kết thúc game và chuyển về main activity.
 
+- Khi end game, ta sẽ so sánh dữ liệu trong board người chơi với board solution trong data được chọn -> thông báo kết thúc game và chuyển về main activity.
+
+
+![End game](https://i.imgur.com/NeMgzwP.png)
+
+---------------------------------------------------------------------------------------------------------
 Các tính năng chưa làm:
 - Lưu board game đang chơi (dự tính dùng sqlite hoặc saved preferences) nhưng em lười viết tiếp. 
 
